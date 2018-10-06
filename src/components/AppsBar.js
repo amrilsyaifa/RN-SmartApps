@@ -7,7 +7,10 @@ import {  AppBar,
           Input,
           Badge,
           MenuItem,
-          Menu
+          Menu,
+          Drawer,
+          List,
+          Divider
         } from '@material-ui/core'
 import { fade } from '@material-ui/core/styles/colorManipulator'
 import { withStyles } from '@material-ui/core/styles'
@@ -17,6 +20,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import { mailFolderListItems, otherMailFolderListItems } from './tileData';
 
 const styles = theme => ({
     root: {
@@ -28,6 +32,10 @@ const styles = theme => ({
     menuButton: {
       marginLeft: -12,
       marginRight: 20,
+    },
+    drawerPaper: {
+      position: 'relative',
+      width: 240,
     },
     title: {
       display: 'none',
@@ -167,7 +175,7 @@ const styles = theme => ({
   
       return (
         <div className={classes.root}>
-          <AppBar position="static">
+          <AppBar position="static" className={classes.appBar}>
             <Toolbar>
               <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
                 <MenuIcon />
@@ -216,6 +224,17 @@ const styles = theme => ({
               </div>
             </Toolbar>
           </AppBar>
+          <Drawer
+        variant="permanent"
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+      >
+        <div className={classes.toolbar} />
+        <List>{mailFolderListItems}</List>
+        <Divider />
+        <List>{otherMailFolderListItems}</List>
+      </Drawer>
           {renderMenu}
           {renderMobileMenu}
         </div>
